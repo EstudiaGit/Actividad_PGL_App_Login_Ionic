@@ -1,0 +1,18 @@
+.centered-text {
+  display: flex;
+  align-items: center;
+}
+
+.top-avatar {
+  margin-top: 2%;
+  margin-right: 10%;
+}
+
+.top-name {
+  margin-top: 4%;
+  margin-right: 10%;
+}
+
+.top-grid {
+  padding: 2% 0% 0% 0%;
+}
