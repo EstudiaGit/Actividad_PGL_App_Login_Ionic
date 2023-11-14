@@ -45,7 +45,7 @@ const LoginPage = () => {
 
   const handleRegistro = () => {
     console.log("¡Redirigir a la página de registro!");
-    // Navegar a la ruta /register usando el objeto history
+    // Navegar a la ruta '/register' usando el objeto history
     history.push("/register");
   };
 

@@ -5,6 +5,7 @@ import { Usuario, usuarios } from "../pages/Usuario";
 import ContactCard from "./ContactCard";
 // Importamos el hook useParams desde react-router-dom
 import { useParams } from "react-router-dom";
+//Importamos algunos detalles
 import "./Contacts.scss";
 
 // Definimos el tipo de las props de Contacts (en este caso, no hay ninguna)
