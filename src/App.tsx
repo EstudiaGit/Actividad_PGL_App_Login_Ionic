@@ -4,7 +4,8 @@ import { Redirect, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/HomePage";
-import RegisterPage from "./pages/RegisterPage"; // Importar el componente RegisterPage
+import RegisterPage from "./pages/RegisterPage";
+import PersonalPage from "./pages/PersonalPage";
 
 /* CSS basicos requeridos por Ionic para correcto funcionamiento */
 import "@ionic/react/css/core.css";
@@ -50,10 +51,14 @@ const App: React.FC = () => (
         <Route exact path="/register">
           <RegisterPage />
         </Route>
+        {/* Ruta para la página de registro */}
+        <Route path="/personal/:id" component={PersonalPage}>
+          <PersonalPage />
+        </Route>
 
         {/* Redirección por defecto a /login */}
         <Route exact path="/">
-          <Redirect to="/login" />
+          <Redirect to="/home" />
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>

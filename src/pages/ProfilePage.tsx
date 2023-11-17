@@ -15,37 +15,64 @@ import {
   IonGrid,
   IonRow,
   IonCol,
+  IonButton,
+  IonIcon,
 } from "@ionic/react";
-import { useParams } from "react-router-dom";
-
-// Importamos el tipo Usuario desde el módulo LoginPage.tsx
-import { Usuario, usuarios } from "./Usuario";
-// Importamos el componente LogoutButton desde el archivo LogoutButton.tsx
+import { body } from "ionicons/icons";
+import { useParams, useHistory } from "react-router-dom";
+import { Usuario, USUARIOS_KEY } from "./Usuario";
 import LogoutButton from "../components/LogoutButton";
-// Importamos el componente Contacts desde el archivo Contacts.tsx
 import Contacts from "../components/Contacts";
-
-// Definimos el tipo de las props de ProfilePage (en este caso, no hay ninguna)
+import { Storage } from "@ionic/storage";
+import { useIonViewWillEnter } from "@ionic/react";
+import { USER_INDEX_KEY } from "./LoginPage";
 type ProfilePageProps = {};
-
-// Definimos el tipo del estado de ProfilePage
 type ProfilePageState = {
-  usuario: Usuario | null; // El usuario puede ser nulo si no se ha encontrado
+  usuario: Usuario | null;
 };
-
 const ProfilePage = (props: ProfilePageProps) => {
-  // Obtenemos el id de la ruta como un string
   const { id } = useParams<{ id: string }>();
-  // Creamos el estado del usuario indicando su tipo
   const [usuario, setUsuario] = useState<ProfilePageState["usuario"]>(null);
-
+  // Creamos una variable para guardar la instancia del Storage
+  const [storage, setStorage] = useState<Storage | null>(null);
+  // Usamos el useHistory hook para acceder al historial de navegación
+  const history = useHistory();
+  const handlePersonal = () => {
+    console.log("¡Redirigir a la página de personal!");
+    // Navegar a la ruta '/register' usando el objeto history
+    history.push(`/personal/${id}`);
+  };
+  // Usamos el hook useEffect para crear el Storage solo una vez cuando el componente se monta
   useEffect(() => {
-    // Buscamos el usuario en el array según el id, que tenemos que convertir a número
-    const usuarioEncontrado = usuarios[Number(id)];
-    // Asignamos el usuario al estado
-    setUsuario(usuarioEncontrado);
-  }, [id]); // Ejecutamos el efecto cada vez que cambie el id
-
+    // Creamos una instancia del Storage y asignamos el driver que queremos usar (por ejemplo, localStorage)
+    const storage = new Storage();
+    // @ts-ignore
+    storage.create({ driverOrder: ["localstorage"] }).then(() => {
+      // Guardamos la instancia del Storage en el estado
+      setStorage(storage);
+    });
+  }, []);
+  // Usamos el hook useIonViewWillEnter para obtener y mostrar los datos del usuario cuando el componente se monta o cambia el id
+  useIonViewWillEnter(() => {
+    if (storage) {
+      // Obtenemos el índice del usuario logueado del localStorage con la clave USER_INDEX_KEY
+      storage.get(USER_INDEX_KEY).then((userIndex) => {
+        // Comprobamos si el usuario está logueado y si el id de la ruta coincide con el índice del usuario logueado
+        if (userIndex !== null && userIndex === Number(id)) {
+          // Obtenemos el array de usuarios del localStorage usando el método get y la clave USUARIOS_KEY
+          storage.get(USUARIOS_KEY).then((usuarios) => {
+            // Obtenemos el usuario correspondiente al índice
+            const usuarioEncontrado = usuarios[userIndex];
+            // Asignamos el usuario al estado usando el hook useState
+            setUsuario(usuarioEncontrado);
+          });
+        } else {
+          // Si el usuario no está logueado o el id de la ruta no coincide, lo redirigimos a la página de inicio de sesión
+          history.push("/login");
+        }
+      });
+    }
+  }, [id, storage]); // Ejecutamos el efecto cada vez que cambie el id o el storage
   return (
     <IonPage>
       <IonHeader>
@@ -54,14 +81,13 @@ const ProfilePage = (props: ProfilePageProps) => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        {usuario && ( // Si el usuario existe, mostramos el contenido
+        {usuario && (
           <IonCard>
             <IonCardHeader color="primary">
               <IonTitle className="ion-text-center" color="dark">
                 {usuario.correo}
               </IonTitle>
             </IonCardHeader>
-
             <IonCardContent className="top-grid">
               <IonGrid>
                 <IonRow>
@@ -74,7 +100,6 @@ const ProfilePage = (props: ProfilePageProps) => {
                     <IonLabel position="floating">{usuario.nombre}</IonLabel>
                   </IonCol>
                 </IonRow>
-
                 <IonRow>
                   <IonCol>
                     <IonLabel position="floating">Biografía: </IonLabel>
@@ -89,7 +114,6 @@ const ProfilePage = (props: ProfilePageProps) => {
             </IonCardContent>
           </IonCard>
         )}
-
         <IonCard>
           <IonCardHeader color="light">
             <IonTitle className="ion-text-center">Contactos</IonTitle>
@@ -99,11 +123,20 @@ const ProfilePage = (props: ProfilePageProps) => {
           </IonCardContent>
         </IonCard>
       </IonContent>
-
       <IonFooter>
-        <IonToolbar>
-          <LogoutButton />
-        </IonToolbar>
+        <IonGrid>
+          <IonRow>
+            <IonCol>
+              <LogoutButton />
+            </IonCol>
+            <IonCol>
+              <IonButton color="primary" expand="full" onClick={handlePersonal}>
+                <IonIcon slot="start" icon={body} />
+                Personal
+              </IonButton>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
       </IonFooter>
     </IonPage>
   );
