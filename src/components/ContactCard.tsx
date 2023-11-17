@@ -23,23 +23,17 @@ const ContactCard = (props: ContactCardProps) => {
   const { contacto } = props;
   // Devolvemos el marcado del IonCard usando los datos del contacto
   return (
-    <IonCard>
-      <IonCardHeader>
-        <IonTitle className="ion-text-center">{contacto.nombre}</IonTitle>
-      </IonCardHeader>
-
+    <IonCard className="ion-padding">
       <IonCardContent>
+        <IonRow className="ion-no-margin">
+          <IonAvatar>
+            <img src={contacto.foto} alt={contacto.nombre} />
+          </IonAvatar>
+          <IonText className="ion-margin">{contacto.nombre}</IonText>
+        </IonRow>
+
         <IonRow>
-          <IonCol>
-            <IonAvatar>
-              <img src={contacto.foto} alt={contacto.nombre} />
-            </IonAvatar>
-          </IonCol>
-          <IonCol>
-            <IonText className="ion-margin centered-text">
-              {contacto.correo}
-            </IonText>
-          </IonCol>
+          <IonText className="ion-padding ">{contacto.correo}</IonText>
         </IonRow>
       </IonCardContent>
     </IonCard>

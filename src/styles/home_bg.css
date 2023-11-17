@@ -1,3 +1,8 @@
 ion-content {
   --background: url(./img/fondo.jpg) 0 0/100% 100% no-repeat;
 }
+
+.translucido {
+  background-color: #000000b1; /* Cambia los valores para ajustar la opacidad */
+  /* Otras propiedades de estilo */
+}

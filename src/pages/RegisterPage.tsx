@@ -116,7 +116,7 @@ const RegisterPage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <IonCard>
+        <IonCard className="translucido">
           <IonCardContent>
             <IonAvatar
               id="avatar-trigger"

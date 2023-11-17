@@ -54,7 +54,7 @@ const HomePage = () => {
         </IonGrid>
       </IonHeader>
       <IonContent className="ion-padding">
-        <IonGrid>
+        <IonGrid className="translucido">
           <IonTitle className="ion-text-center">
             <h4>Actividad de Sesiones</h4>
             <h5>para PGL</h5>

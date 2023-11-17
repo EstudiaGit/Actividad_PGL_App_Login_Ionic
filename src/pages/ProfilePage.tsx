@@ -26,6 +26,8 @@ import Contacts from "../components/Contacts";
 import { Storage } from "@ionic/storage";
 import { useIonViewWillEnter } from "@ionic/react";
 import { USER_INDEX_KEY } from "./LoginPage";
+import "../styles/profile_user_card.css";
+
 type ProfilePageProps = {};
 type ProfilePageState = {
   usuario: Usuario | null;
@@ -84,20 +86,20 @@ const ProfilePage = (props: ProfilePageProps) => {
         {usuario && (
           <IonCard>
             <IonCardHeader color="primary">
-              <IonTitle className="ion-text-center" color="dark">
-                {usuario.correo}
+              <IonTitle size="small" className="ion-text-center" color="dark">
+                {usuario.nombre}
               </IonTitle>
             </IonCardHeader>
             <IonCardContent className="top-grid">
               <IonGrid>
                 <IonRow>
-                  <IonCol className="top-avatar">
+                  <IonCol size="2" className="top-avatar">
                     <IonAvatar>
                       <img src={usuario.foto} alt={usuario.nombre} />
                     </IonAvatar>
                   </IonCol>
-                  <IonCol className="top-name">
-                    <IonLabel position="floating">{usuario.nombre}</IonLabel>
+                  <IonCol className="custom-highlight">
+                    <IonLabel position="floating">{usuario.correo}</IonLabel>
                   </IonCol>
                 </IonRow>
                 <IonRow>
@@ -107,7 +109,9 @@ const ProfilePage = (props: ProfilePageProps) => {
                 </IonRow>
                 <IonRow>
                   <IonCol>
-                    <IonText>{usuario.bio}</IonText>
+                    <IonText>
+                      Soy, {usuario.nombre}. {usuario.bio}
+                    </IonText>
                   </IonCol>
                 </IonRow>
               </IonGrid>

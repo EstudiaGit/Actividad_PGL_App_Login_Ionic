@@ -100,7 +100,7 @@ const LoginPage = () => {
       </IonHeader>
 
       <IonContent className="ion-padding">
-        <IonCard>
+        <IonCard className="translucido">
           <IonCardHeader>
             <IonTitle className="ion-text-center">Login</IonTitle>
           </IonCardHeader>

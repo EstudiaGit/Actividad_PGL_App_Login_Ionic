@@ -23,9 +23,6 @@ import { useParams, useHistory } from "react-router-dom";
 // Importamos los tipos y constantes de Usuario
 import { Usuario, USUARIOS_KEY } from "./Usuario";
 
-// Importamos el componente LogoutButton
-import LogoutButton from "../components/LogoutButton";
-
 // Importamos el Storage de Ionic
 import { Storage } from "@ionic/storage";
 
@@ -113,7 +110,7 @@ const PersonalPage = (props: PersonalPageProps) => {
           <IonCard>
             <IonCardHeader color="primary">
               <IonTitle className="ion-text-center" color="dark">
-                {usuario.correo}
+                {usuario.nombre}
               </IonTitle>
             </IonCardHeader>
             <IonCardContent className="top-grid">
@@ -125,7 +122,7 @@ const PersonalPage = (props: PersonalPageProps) => {
                     </IonAvatar>
                   </IonCol>
                   <IonCol className="top-name">
-                    <IonLabel position="floating">{usuario.nombre}</IonLabel>
+                    <IonLabel position="floating">{usuario.correo}</IonLabel>
                   </IonCol>
                 </IonRow>
                 <IonRow>
@@ -145,7 +142,9 @@ const PersonalPage = (props: PersonalPageProps) => {
                 </IonRow>
                 <IonRow>
                   <IonCol>
-                    <IonText>{usuario.myhistory}</IonText>
+                    <IonText>
+                      Soy {usuario.nombre}. {usuario.myhistory}
+                    </IonText>
                   </IonCol>
                 </IonRow>
               </IonGrid>

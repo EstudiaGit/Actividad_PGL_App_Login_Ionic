@@ -16,3 +16,14 @@
 .top-grid {
   padding: 2% 0% 0% 0%;
 }
+
+.custom-highlight {
+  font-weight: bold; /* Texto en negrita */
+  font-size: medium;
+  color: #636a71; /* Color diferente para destacar */
+}
+
+.custom-title {
+  font-size: small;
+  color: #6f777f; /* Color diferente para destacar */
+}
