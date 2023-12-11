@@ -7,7 +7,7 @@ Acividad con Ionic para App de Login Registro y Usuario
 
 # Capturas de pantalla.
 
-![1 Home_1](https://github.com/EstudiaGit/Actividad_PGL_App_Login_Ionic/assets/93317704/b020f243-dc23-4bef-b59c-2e72c44a1257)
+<img src="[screenshot/cap_1.jpg](https://github.com/EstudiaGit/Actividad_PGL_App_Login_Ionic/assets/93317704/b020f243-dc23-4bef-b59c-2e72c44a1257)" width="300">
 - Pagina inicial.
   ---
   ![2 Login_2](https://github.com/EstudiaGit/Actividad_PGL_App_Login_Ionic/assets/93317704/d7735629-0f34-4070-8c13-7df8417bcfff)
